@@ -10,6 +10,10 @@ typing.
 the buddy in the buddy-list  window. 
  * To set response messages for some accounts, go to the "Advanced" tab of the account edit dialog.
 
+## Acknowledgement
+ * ``Makefile`` was modified from [EionRobb/purple-discord](https://github.com/EionRobb/purple-discord), which is licensed under GPLv3 or later version.
+ * ``libtransponder.c`` was modfied from the Autoreply plugin from [Purple Plugin Pack](https://bitbucket.org/pidgin/purple-plugin-pack), which is licensed under GPLv2 or later version.
+
 ## License
     pidgin-transponder - Automatically respond with a message when your contact
     starts typing
