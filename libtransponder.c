@@ -44,7 +44,6 @@
 #define	PREFS_MAXSEND		PREFS_PREFIX "/maxsend"
 #define	PREFS_USESTATUS		PREFS_PREFIX "/usestatus"
 #define	PREFS_PREFIX_MSG    PREFS_PREFIX "/prefix"
-#define PREFS_ONLINE_MSG    PREFS_PREFIX "/onlinemsg"
 
 #define PREFS_X_INVISIBLE     PREFS_PREFIX "/invisible"
 
@@ -160,10 +159,6 @@ written_msg(PurpleAccount *account, const char *who)
 
 	buddy = purple_find_buddy(account, who);
 	reply = get_autotranspond_message(buddy, account);
-    
-    if (purple_prefs_get_bool(PREFS_ONLINE)) {
-        reply = purple_prefs_get_string(PREFS_ONLINE_MSG);
-    }
 
 	if (reply)
 	{
@@ -392,15 +387,9 @@ get_plugin_pref_frame(PurplePlugin *plugin)
 					_("_Default reply"));
 	purple_plugin_pref_set_type(pref, PURPLE_PLUGIN_PREF_STRING_FORMAT);
 	purple_plugin_pref_set_format_type(pref, 
-                                       PURPLE_STRING_FORMAT_TYPE_MULTILINE);
+                                       PURPLE_STRING_FORMAT_TYPE_MULTILINE |
+                                       PURPLE_STRING_FORMAT_TYPE_HTML);
 	purple_plugin_pref_frame_add(frame, pref);
-    
-    pref = purple_plugin_pref_new_with_name_and_label(PREFS_ONLINE_MSG,
-                                                      _("O_nline reply"));
-    purple_plugin_pref_set_type(pref, PURPLE_PLUGIN_PREF_STRING_FORMAT);
-    purple_plugin_pref_set_format_type(pref, 
-                                       PURPLE_STRING_FORMAT_TYPE_MULTILINE);
-    purple_plugin_pref_frame_add(frame, pref);
 
 	pref = purple_plugin_pref_new_with_name_and_label(PREFS_PREFIX_MSG,
 					_("Autotranspond Prefix\n(only when necessary)"));
@@ -508,10 +497,7 @@ init_plugin(PurplePlugin *plugin)
 	purple_prefs_add_bool(PREFS_IDLE, TRUE);
 	purple_prefs_add_bool(PREFS_AWAY, TRUE);
     purple_prefs_add_bool(PREFS_ONLINE, TRUE);
-	purple_prefs_add_string(PREFS_GLOBAL, _("I know you are typing, but I am "
-        "not in front of my computer or on my phone. Please keep typing and "
-        "don't be alarmed."));
-    purple_prefs_add_string(PREFS_ONLINE_MSG, _("I know you are typing, lol."));
+	purple_prefs_add_string(PREFS_GLOBAL, _("Hi."));
 	purple_prefs_add_int(PREFS_MINTIME, 20);
 	purple_prefs_add_int(PREFS_MAXSEND, 10);
 	purple_prefs_add_int(PREFS_USESTATUS, STATUS_NEVER);
